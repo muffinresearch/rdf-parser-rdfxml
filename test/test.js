@@ -317,6 +317,7 @@ describe('RDF/XML parser', function () {
   })
 
   describe('example data', function () {
+
     it('card.xml should be parsed', function (done) {
       var parser = new RdfXmlParser()
 
@@ -330,6 +331,19 @@ describe('RDF/XML parser', function () {
         done(error)
       })
     })
+
+    it('install.rdf should be parsed', function (done) {
+      var parser = new RdfXmlParser()
+
+      testUtils.readFile('support/install.rdf', __dirname).then(function (rdf) {
+        return parser.parse(rdf);
+      }).then(function () {
+        done()
+      }).catch(function (error) {
+        done(error)
+      })
+    })
+
 
     /* it('card.json should feed prefix map', function (done) {
       var parser = new RdfXmlParser()

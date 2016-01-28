@@ -255,7 +255,10 @@ var RdfLibParser = function(store){
     var rdfid;
     var elementURI = function(el){
       var result = "";
-      if (el.namespaceURI == null){
+      var unqualified = ['ID', 'about', 'resource', 'parseType', 'type'];
+      if (el.namespaceURI == null && unqualified.indexOf(el.localName !== -1)) {
+        result = result + RDFParser.ns.RDF;
+      } else if (el.namespaceURI == null){
         throw new Error("RDF/XML syntax error: No namespace for " + el.localName + " in " + this.base);
       }
       if (el.namespaceURI){
